@@ -3,6 +3,7 @@ import cv2
 import time
 import numpy as np
 
+import pyautogui
 from hand import HandDetector
 from utils.templates import Gesture
 from utils.utils import two_landmark_distance
@@ -83,7 +84,7 @@ class GestureDetector:
     def draw_gesture_box(self, img):
         hand = self.hand_detector.decoded_hands[-1]
         draw_bounding_box(hand['landmarks'], self.detected_gesture, img)
-        
+
 def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
     cap = cv2.VideoCapture(0)
     cap.set(3, cam_w)
@@ -100,6 +101,8 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         if ges_detector.detected_gesture:
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
+            if ges_detector.detected_gesture == 'C shape':
+                pyautogui.press('space')
         # compute fps
         current_time = time.time()
         fps = 1 / (current_time - past_time)
