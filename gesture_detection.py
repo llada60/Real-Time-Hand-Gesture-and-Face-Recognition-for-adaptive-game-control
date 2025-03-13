@@ -64,7 +64,11 @@ class GestureDetector:
                 self.check_finger_states(hand)
                 if draw:
                     self.draw_gesture_landmarks(img)
-                
+                print(hand['wrist_angle'])
+                # print(hand['landmarks'])
+                print(hand['direction'])
+                # print(hand['boundary'])
+                print("------------------------")
                 ges = Gesture(hand['label'])
                 self.detected_gesture = map_gesture(ges.gestures,
                                                     self.finger_states,
