@@ -9,7 +9,7 @@ from utils.templates import Gesture
 from utils.utils import two_landmark_distance
 from utils.utils import calculate_angle, calculate_thumb_angle, get_finger_state
 from utils.utils import map_gesture, draw_bounding_box, draw_fingertips
-from gesture_key import press_key
+from gesture_key import Gesture
 
 THUMB_THRESH = [9, 8]
 NON_THUMB_THRESH = [8.6, 7.6, 6.6, 6.1]
@@ -99,6 +99,7 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
     past_time = 0
     current_time = 0
     gaming_module = True
+    dynamic_module = False
     while True:
         _, img = cap.read()
         img = cv2.flip(img, 1)
@@ -107,7 +108,8 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
-                press_key(ges_detector.detected_gesture) # press key based on detected gesture
+                Gesture(ges_detector.detected_gesture) # press key based on detected gesture
+                Gesture.press_key()
         # compute fps
         current_time = time.time()
         fps = 1 / (current_time - past_time)
@@ -122,6 +124,10 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         if key == ord('g'):
             gaming_module = not gaming_module
             print(f'Gaming module: {gaming_module}')
+        if key == ord('d'):
+            dynamic_module = not dynamic_module
+            print(f'Dynamic module: {dynamic_module}')
+            # lwq TODO: add dynamic control function/class import here
         
 
     

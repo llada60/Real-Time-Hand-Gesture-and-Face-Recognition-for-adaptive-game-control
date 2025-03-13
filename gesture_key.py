@@ -1,5 +1,9 @@
 import pyautogui
-def press_key(gesture):
-    if gesture == 'C shape':
-        pyautogui.press('space')
+
+class Gesture:
+    def __init__(self, gesture):
+        self.gesture = gesture
+    def press_key(self):
+        if self.gesture == 'C shape':
+            pyautogui.press('space')
     
