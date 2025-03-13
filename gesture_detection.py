@@ -9,6 +9,7 @@ from utils.templates import Gesture
 from utils.utils import two_landmark_distance
 from utils.utils import calculate_angle, calculate_thumb_angle, get_finger_state
 from utils.utils import map_gesture, draw_bounding_box, draw_fingertips
+from gesture_key import press_key
 
 THUMB_THRESH = [9, 8]
 NON_THUMB_THRESH = [8.6, 7.6, 6.6, 6.1]
@@ -86,6 +87,9 @@ class GestureDetector:
         draw_bounding_box(hand['landmarks'], self.detected_gesture, img)
 
 def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
+    # default module is gaming -- press key based on detected gesture
+    # press key 'g' to close/open the gaming module
+    # if you want to use dynamic modules, press key 'd'
     cap = cv2.VideoCapture(0)
     cap.set(3, cam_w)
     cap.set(4, cam_h)
@@ -94,6 +98,7 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
     ges_detector = GestureDetector(max_num_hands=num_hands)
     past_time = 0
     current_time = 0
+    gaming_module = True
     while True:
         _, img = cap.read()
         img = cv2.flip(img, 1)
@@ -101,8 +106,8 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         if ges_detector.detected_gesture:
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
-            if ges_detector.detected_gesture == 'C shape':
-                pyautogui.press('space')
+            if gaming_module:
+                press_key(ges_detector.detected_gesture) # press key based on detected gesture
         # compute fps
         current_time = time.time()
         fps = 1 / (current_time - past_time)
@@ -114,6 +119,10 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         if key == ord('q'):
             cv2.destroyAllWindows()
             break
+        if key == ord('g'):
+            gaming_module = not gaming_module
+            print(f'Gaming module: {gaming_module}')
+        
 
     
     return
