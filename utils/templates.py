@@ -77,7 +77,7 @@ class Gesture:
                              'wrist angle':     [0.30, 0.70],
                              'overlap':         [[4, 8]],
                              'boundary':        None},
-            'C shape':      {'finger states':   [[0], [1], [1], [1], [1]],
+            'C shape':      {'finger states':   [[0], [1,2], [1,2], [1,2], [1,2]],
                              'direction':       'up',
                              'wrist angle':     [0, 0.35],
                              'overlap':         None,
