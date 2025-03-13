@@ -1,6 +1,6 @@
 import pyautogui
 
-class Gesture:
+class GestureControl:
     def __init__(self, gesture):
         self.gesture = gesture
     def press_key(self):

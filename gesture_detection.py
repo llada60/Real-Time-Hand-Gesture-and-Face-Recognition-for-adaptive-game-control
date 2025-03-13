@@ -9,7 +9,7 @@ from utils.templates import Gesture
 from utils.utils import two_landmark_distance
 from utils.utils import calculate_angle, calculate_thumb_angle, get_finger_state
 from utils.utils import map_gesture, draw_bounding_box, draw_fingertips
-from gesture_key import Gesture
+from gesture_key import GestureControl
 
 THUMB_THRESH = [9, 8]
 NON_THUMB_THRESH = [8.6, 7.6, 6.6, 6.1]
@@ -108,8 +108,8 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
-                Gesture(ges_detector.detected_gesture) # press key based on detected gesture
-                Gesture.press_key()
+                gesture = GestureControl(ges_detector.detected_gesture) # press key based on detected gesture
+                gesture.press_key()
         # compute fps
         current_time = time.time()
         fps = 1 / (current_time - past_time)
