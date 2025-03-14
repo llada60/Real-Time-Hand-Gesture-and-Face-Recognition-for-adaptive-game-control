@@ -18,6 +18,93 @@ THUMB_THRESH = [9, 8]
 NON_THUMB_THRESH = [8.6, 7.6, 6.6, 6.1]
 
 BENT_RATIO_THRESH = [0.76, 0.88, 0.85, 0.65]
+import math
+import numpy as np
+import random
+import cv2
+
+class BalloonParticle:
+    def __init__(self, screen_width, screen_height):
+        self.pos = np.array([random.randint(50, screen_width - 50), screen_height], dtype=float)
+
+        self.color = tuple(np.random.randint(100, 256, size=3).tolist())
+
+        self.radius = random.randint(30, 60)  
+
+        self.vel = np.array([random.uniform(-1, 1), random.uniform(-3, -5)], dtype=float)  
+
+        self.swing_amplitude = random.uniform(5, 20)  
+        self.swing_frequency = random.uniform(0.03, 0.1)  
+
+        self.life = random.randint(200, 300)  
+        self.initial_life = self.life
+
+        self.curve_intensity = random.randint(10, 30)  
+
+    def update(self):
+        self.life -= 1
+        self.pos += self.vel  
+        self.pos[0] += math.sin(self.pos[1] * self.swing_frequency) * self.swing_amplitude  
+
+    def is_alive(self):
+        return self.life > 0
+
+    def draw(self, img):
+
+        alpha = (self.life / self.initial_life) ** 2 
+        draw_color = (
+            int(self.color[0] * alpha),
+            int(self.color[1] * alpha),
+            int(self.color[2] * alpha),
+        )
+        center = (int(self.pos[0]), int(self.pos[1]))
+        overlay = img.copy()
+        cv2.circle(overlay, center, self.radius, draw_color, -1)
+        cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0, img)
+
+        self.draw_curved_rope(img, center)
+
+    def draw_curved_rope(self, img, center):
+        rope_start = (center[0], center[1] + self.radius)
+        rope_end = (center[0] + random.randint(-5, 5), center[1] + self.radius + 50)
+
+        control_point = (
+            rope_start[0] + random.randint(-self.curve_intensity, self.curve_intensity),
+            rope_start[1] + (rope_end[1] - rope_start[1]) // 2
+        )
+
+        points = []
+        for t in np.linspace(0, 1, 10):
+            x = int((1 - t) ** 2 * rope_start[0] + 2 * (1 - t) * t * control_point[0] + t ** 2 * rope_end[0])
+            y = int((1 - t) ** 2 * rope_start[1] + 2 * (1 - t) * t * control_point[1] + t ** 2 * rope_end[1])
+            points.append((x, y))
+
+        for i in range(len(points) - 1):
+            cv2.line(img, points[i], points[i + 1], (50, 50, 50), 2)
+
+
+class BalloonEffect:
+    def __init__(self, screen_width, screen_height):
+        self.particles = []
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.spawn_delay = 0  
+
+    def update(self, spawn_new=False):
+        self.particles = [p for p in self.particles if p.is_alive()]
+
+        if spawn_new and self.spawn_delay % 10 == 0:
+            self.particles.append(BalloonParticle(self.screen_width, self.screen_height))
+        
+        self.spawn_delay += 1  
+
+        for p in self.particles:
+            p.update()
+
+    def draw(self, img):
+        for p in self.particles:
+            p.draw(img)
+
 #-----------------------------
 #彩带
 #-----------------------------
@@ -260,6 +347,8 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
     
     firework_effect = FireworkEffect()
     confetti_effect = ConfettiEffect(actual_width, actual_height)
+    balloon_effect = BalloonEffect(actual_width, actual_height)
+
     while True:
         _, img = cap.read()
         img = cv2.flip(img, 1)
@@ -279,9 +368,6 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             firework_effect.draw(img)
 
         if ges_detector.detected_gesture:
-         #   spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
-         #   confetti_effect.update(spawn_new=spawn_confetti)
-         #   confetti_effect.draw(img)
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
@@ -291,6 +377,10 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
             confetti_effect.update(spawn_new=spawn_confetti)
             confetti_effect.draw(img)
+        if ges_detector.detected_gesture == 'Two (Yeah)':
+            spawn_balloons = ges_detector.detected_gesture == 'Two (Yeah)'
+            balloon_effect.update(spawn_new=spawn_balloons)
+            balloon_effect.draw(img)
         
         if dynamic_module:
             print("Finger tip pos:", finger_tip_pixel)
