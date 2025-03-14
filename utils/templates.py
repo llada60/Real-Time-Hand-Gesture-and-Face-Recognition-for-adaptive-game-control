@@ -14,7 +14,7 @@ class Gesture:
                              'boundary':        None},
             'Left':           {'finger states':   [[0,2,3,4], [0], [3, 4], [3, 4], [3, 4]],
                              'direction':       'left',
-                             'wrist angle':     [0.65, 0.9],
+                             'wrist angle':     [0.65, 0.93],
                              'overlap':         None,
                              'boundary':        None},
             'Right':           {'finger states':   [[0], [3,4], [3, 4], [3, 4], [3, 4]],

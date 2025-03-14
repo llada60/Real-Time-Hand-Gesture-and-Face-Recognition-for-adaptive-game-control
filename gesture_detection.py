@@ -212,12 +212,13 @@ class GestureDetector:
                 self.check_finger_states(hand)
                 if draw:
                     self.draw_gesture_landmarks(img)
-                print(hand['wrist_angle'])
-                # print(hand['landmarks'])
-                print(hand['direction'])
-                # print(hand['boundary'])
-                print("------------------------")
+                # print(hand['wrist_angle'])
+                # # print(hand['landmarks'])
+                # print(hand['direction'])
+                # # print(hand['boundary'])
+                # print("------------------------")
                 ges = Gesture(hand['label'])
+
                 self.detected_gesture = map_gesture(ges.gestures,
                                                     self.finger_states,
                                                     hand['landmarks'],
@@ -254,7 +255,7 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
     ges_detector = GestureDetector(max_num_hands=num_hands)
     past_time = 0
     current_time = 0
-    gaming_module = True
+    gaming_module = 0 # 0 no gaming; 1 space jump; 2 arrow keys; 3 both
     dynamic_module = False
     
     firework_effect = FireworkEffect()
@@ -263,6 +264,7 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         _, img = cap.read()
         img = cv2.flip(img, 1)
         ges_detector.detect_gesture(img, num_hands)
+        # print(ges_detector.detected_gesture)
         finger_tip_pixel = None
         h, w, _ = img.shape
   
@@ -286,7 +288,7 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
                 gesture = GestureControl(ges_detector.detected_gesture) # press key based on detected gesture
-                gesture.press_key()
+                gesture.press_key(gaming_module)
         
         if dynamic_module:
             print("Finger tip pos:", finger_tip_pixel)
@@ -306,8 +308,15 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             cv2.destroyAllWindows()
             break
         if key == ord('g'):
-            gaming_module = not gaming_module
-            print(f'Gaming module: {gaming_module}')
+            gaming_module = (gaming_module + 1) % 4
+            if gaming_module == 0:
+                print("Gaming module is off")
+            elif gaming_module == 1:
+                print("Gaming module: C Shape for Space jump")
+            elif gaming_module == 2:
+                print("Gaming module: Arrow keys")
+            else:
+                print("Gaming module: Space jump and Arrow keys")
         if key == ord('d'):
             dynamic_module = not dynamic_module
             print(f'Dynamic module: {dynamic_module}')
