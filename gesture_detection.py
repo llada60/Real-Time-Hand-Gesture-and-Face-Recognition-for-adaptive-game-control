@@ -279,14 +279,18 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             firework_effect.draw(img)
 
         if ges_detector.detected_gesture:
-            spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
-            confetti_effect.update(spawn_new=spawn_confetti)
-            confetti_effect.draw(img)
+         #   spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
+         #   confetti_effect.update(spawn_new=spawn_confetti)
+         #   confetti_effect.draw(img)
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
                 gesture = GestureControl(ges_detector.detected_gesture) # press key based on detected gesture
                 gesture.press_key(gaming_module)
+        if ges_detector.detected_gesture == 'Thumbs-up':
+            spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
+            confetti_effect.update(spawn_new=spawn_confetti)
+            confetti_effect.draw(img)
         
         if dynamic_module:
             print("Finger tip pos:", finger_tip_pixel)
