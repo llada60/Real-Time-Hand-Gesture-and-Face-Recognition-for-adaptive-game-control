@@ -277,13 +277,11 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
 
 
             firework_effect.draw(img)
+
+        if ges_detector.detected_gesture:
             spawn_confetti = ges_detector.detected_gesture == 'Thumbs-up'
             confetti_effect.update(spawn_new=spawn_confetti)
             confetti_effect.draw(img)
-
-
-
-        if ges_detector.detected_gesture:
             if target_gesture == 'all' or target_gesture == ges_detector.detected_gesture:
                 ges_detector.draw_gesture_box(img)
             if gaming_module:
