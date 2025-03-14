@@ -7,6 +7,8 @@ class GestureControl:
         if module_num == 1 or module_num == 3:
             if self.gesture == 'C shape':
                 pyautogui.press('space')
+            elif self.gesture == 'Horizontal':
+                pyautogui.press('down')
         elif module_num == 2 or module_num == 3:
             if self.gesture == 'Up':
                 pyautogui.press('up')
@@ -16,5 +18,6 @@ class GestureControl:
                 pyautogui.press('left')
             elif self.gesture == 'Right':
                 pyautogui.press('right')
+            
 
     

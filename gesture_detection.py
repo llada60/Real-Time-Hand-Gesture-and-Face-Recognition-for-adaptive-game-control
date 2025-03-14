@@ -312,9 +312,9 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
             if gaming_module == 0:
                 print("Gaming module is off")
             elif gaming_module == 1:
-                print("Gaming module: C Shape for Space jump")
+                print("Dinosaur Gaming module: C Shape for Space jump, Palm Horizontal for Duck")
             elif gaming_module == 2:
-                print("Gaming module: Arrow keys")
+                print("Pacman Gaming module: Arrow keys")
             else:
                 print("Gaming module: Space jump and Arrow keys")
         if key == ord('d'):
