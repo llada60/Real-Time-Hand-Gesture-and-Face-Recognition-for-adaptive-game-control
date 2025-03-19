@@ -10,7 +10,7 @@ import cv2
 import time
 import numpy as np
 
-from hand import HandDetector
+from utils.hand import HandDetector
 from utils.templates import Gesture
 from utils.utils import two_landmark_distance
 from utils.utils import calculate_angle, calculate_thumb_angle, get_finger_state
