@@ -4,14 +4,13 @@ import time
 import numpy as np
 
 import random
-from hand import HandDetector
+from utils.hand import HandDetector
 from utils.templates import Gesture
 from utils.utils import two_landmark_distance
 from utils.utils import calculate_angle, calculate_thumb_angle, get_finger_state
 from utils.utils import map_gesture, draw_bounding_box, draw_fingertips
-from gesture_key import GestureControl
+from utils.gesture_key import GestureControl
 import math
-
 
 
 THUMB_THRESH = [9, 8]
@@ -412,7 +411,6 @@ def main(num_hands=1, target_gesture='all', cam_w=1280, cam_h=720):
         if key == ord('d'):
             dynamic_module = not dynamic_module
             print(f'Dynamic module: {dynamic_module}')
-            # lwq TODO: add dynamic control function/class import here
         
     cap.release()
     cv2.destroyAllWindows()
