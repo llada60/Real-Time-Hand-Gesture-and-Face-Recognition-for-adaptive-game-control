@@ -7,7 +7,7 @@ This project aims to develop a real-time interaction system for gaming applicati
 
 Hand gesture recognition based on the hand module of Google's [mediapipe](https://github.com/google/mediapipe) API. The hand module gives the coordinates of 21 hand landmarks, which can be found in the image below.
 
-<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/hand_landmark.png" width="100px">
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/hand_landmark.png" width="500px">
 
 This project focuses on four functionalities:
 1. Hand gesture recognition.
@@ -42,8 +42,8 @@ For visual module, you can press 'd' for open or close.
 ## Demo
 
 ### Game Control with hand gestures
-<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/cshape.gif" width="100px">
-<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/pacman.gif" width="100px">
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/cshape.gif" width="700px">
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/pacman.gif" width="700px">
 
 ### Visual Effects with hand gestures
 ![fingertip_tracking](https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/fingertip.gif)
