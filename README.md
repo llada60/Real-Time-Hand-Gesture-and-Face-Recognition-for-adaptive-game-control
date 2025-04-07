@@ -46,10 +46,10 @@ For visual module, you can press 'd' for open or close.
 <img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/pacman.gif" width="700px">
 
 ### Visual Effects with hand gestures
-![fingertip_tracking](https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/fingertip.gif)
-![yeah](https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/yeah.gif)
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/fingertip.gif" width="700px">
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/yeah.gif" width="700px">
 
 ### Game Control with facial expressions
 
 The facial expression is used to control the difficulty of the game.
-![facial_control](https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/face.gif)
+<img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/face.gif" width="700px">
