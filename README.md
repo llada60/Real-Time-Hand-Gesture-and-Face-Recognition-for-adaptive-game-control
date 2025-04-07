@@ -1,64 +1,46 @@
-[![GitHub issues](https://img.shields.io/github/issues/jhan15/hand_gesture_detection)](https://github.com/jhan15/hand_gesture_detection/issues)
-![GitHub last commit](https://img.shields.io/github/last-commit/jhan15/hand_gesture_detection?color=ff69b4)
 
-# hand_gesture_detection
-Hand gesture detection based on the hand module of Google's [mediapipe](https://github.com/google/mediapipe) API. The hand module gives the coordinates of 21 hand landmarks, which can be found in the image below.
+# Real-time Hand Gesture and Face Recognition for adative Game Control
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/62132206/124274282-5af07f80-db41-11eb-9ac8-bf14d9680d68.png?raw=true" width="600">
-</p>
+This project aims to develop a real-time interaction system for gaming applications and interactive visual effects using state-of-the-art computer vision techniques. It consists of two main components: hand gesture recognition and facial expression recognition.
 
-This project focuses on three functionalities:
-1. Hand detection.
-2. Hand gesture detection.
-3. Volume control using hand gestures.
+Hand gesture recognition based on the hand module of Google's [mediapipe](https://github.com/google/mediapipe) API. The hand module gives the coordinates of 21 hand landmarks, which can be found in the image below.
+
+
+
+This project focuses on four functionalities:
+1. Hand gesture recognition.
+2. Facial expression recognition.
+3. Game control by keyboard using hand gestures and facial expressions.
+4. Visual effects using hand gestures.
 
 ## Requirements
-Python 3.8 or later with dependencies listed in [requirements.txt](https://github.com/jhan15/gesture_detection/blob/master/requirements.txt). To install run:
+Python 3.8 or later with dependencies listed in requirements.txt. To install run:
 
 ```bash
-$ git clone https://github.com/jhan15/hand_gesture_detection.git
-$ cd hand_gesture_detection
+$ git clone https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control.git
+$ cd Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control
 $ pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```bash
-# Hand detector
-$ python3 hand.py --max_hands 2
-
-# Gesture detector
-$ python3 gesture_detection.py --num_hands 1 # currenly only single-hand gestures are supported
-
-# Volume controller
-$ python3 vol_controller.py --control continuous # continuous control
-                                      step # step control
+# Hand Recognition
+$ python gesture_detection.py
 ```
+
+For different game controls, you can press 'g' to switch different game modules. The following modules are available:
+1. [Dinosaur Gaming](https://chromedino.com/) Module: c shape for space jump and palm horizontal for duck.
+2. [Pacman Gaming](https://www.google.com/logos/2010/pacman10-i.html) Module: different turning hand to control arrow keys.
+3. Both arrow keys and space key.
+4. Turn off gaming module.
+
+For visual module, you can press 'd' for open or close.
 
 ## Demo
 
-### Hand detector
-Detect hands on streams, it draws the landmarks on detected hands and returns several hand features, including handedness, landmark coordinates, hand direction, hand facing, boundary landmarks, wrist angle.
+### Game Control with hand gestures
 
-![hand1](https://user-images.githubusercontent.com/62132206/127870204-96725670-6db0-4025-be46-bd3efacae085.gif)
+### Visual Effects with hand gestures
 
-### Gesture detector
-Detect hand gestures on streams, now it can detect 18 pre-defined hand gestures, including Chinese number 1 - 10, 'OK', 'Thumbs-up', 'Thumbs-down', 'Rock', 'Claw', 'C shape', 'O shape', 'Pinch'.
-
-![gesture1](https://user-images.githubusercontent.com/62132206/127870254-c205a04a-4b7f-4ce3-b4e6-549a38183125.gif)
-
-### Volume controller
-Control volume using hand gestures. It's a possible application in areas like smart home and in-cabin interaction. Hand gestures can be used for activation, control, and deactivation. In this case, we use 'Pinch' as activation and control gesture and 'C shape' as deactivation gesture. There are two types of control behavior here, continuous control and step control.
-
-#### Continuous control
-
-![continuous1](https://user-images.githubusercontent.com/62132206/127870281-51b98ccb-60c0-491d-b26e-712804d0b639.gif)
-
-#### Step control
-
-![step1](https://user-images.githubusercontent.com/62132206/127870295-00b94af1-3fbb-474b-b0f0-3e717d6d4882.gif)
-
-#### Issue
-
-The package I used to control Macbook's volume is [osascript](https://github.com/andrewp-as-is/osascript.py), it will reduce the FPS from ~30 to ~5.
+### Game Control with facial expressions
