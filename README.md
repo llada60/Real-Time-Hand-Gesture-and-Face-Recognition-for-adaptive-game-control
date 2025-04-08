@@ -47,8 +47,8 @@ For visual module, you can press 'd' for open or close.
 
 ### Visual Effects with hand gestures
 <div style="display: flex; gap: 10px; align-items: center;">
-  <img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/fingertip.gif?raw=true" width="300px">
-  <img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/yeah.gif?raw=true" width="300px">
+  <img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/fingertip.gif?raw=true" width="300px" height="600px">
+  <img src="https://github.com/llada60/Real-Time-Hand-Gesture-and-Face-Recognition-for-adaptive-game-control/blob/main/img/yeah.gif?raw=true" width="300px" height="600px">
 </div>
 
 ### Game Control with facial expressions
